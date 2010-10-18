@@ -1,16 +1,16 @@
-.function orc_splat_u32
+.function blendorc_splat_u32
 .dest 4 d1 guint32
 .param 4 p1 guint32
 
 copyl d1, p1
 
-.function orc_memcpy_u32
+.function blendorc_memcpy_u32
 .dest 4 d1 guint32
 .source 4 s1 guint32
 
 copyl d1, s1
 
-.function orc_blend_u8
+.function blendorc_blend_u8
 .flags 2d
 .dest 1 d1 guint8
 .source 1 s1 guint8

@@ -58,9 +58,9 @@ typedef union
 } orc_union64;
 #endif
 
-void orc_splat_u32 (guint32 * d1, int p1, int n);
-void orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n);
-void orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
+void blendorc_splat_u32 (guint32 * d1, int p1, int n);
+void blendorc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n);
+void blendorc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
     int p1, int n, int m);
 
 
@@ -97,7 +97,7 @@ void orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
 /* orc_splat_u32 */
 #ifdef DISABLE_ORC
 void
-orc_splat_u32 (guint32 * d1, int p1, int n)
+blendorc_splat_u32 (guint32 * d1, int p1, int n)
 {
   int i;
   orc_union32 var0;
@@ -117,7 +117,7 @@ orc_splat_u32 (guint32 * d1, int p1, int n)
 
 #else
 static void
-_backup_orc_splat_u32 (OrcExecutor * ex)
+_backup_blendorc_splat_u32 (OrcExecutor * ex)
 {
   int i;
   int n = ex->n;
@@ -137,7 +137,7 @@ _backup_orc_splat_u32 (OrcExecutor * ex)
 }
 
 void
-orc_splat_u32 (guint32 * d1, int p1, int n)
+blendorc_splat_u32 (guint32 * d1, int p1, int n)
 {
   OrcExecutor _ex, *ex = &_ex;
   static int p_inited = 0;
@@ -150,8 +150,8 @@ orc_splat_u32 (guint32 * d1, int p1, int n)
       OrcCompileResult result;
 
       p = orc_program_new ();
-      orc_program_set_name (p, "orc_splat_u32");
-      orc_program_set_backup_function (p, _backup_orc_splat_u32);
+      orc_program_set_name (p, "blendorc_splat_u32");
+      orc_program_set_backup_function (p, _backup_blendorc_splat_u32);
       orc_program_add_destination (p, 4, "d1");
       orc_program_add_parameter (p, 4, "p1");
 
@@ -177,7 +177,7 @@ orc_splat_u32 (guint32 * d1, int p1, int n)
 /* orc_memcpy_u32 */
 #ifdef DISABLE_ORC
 void
-orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
+blendorc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
 {
   int i;
   orc_union32 var0;
@@ -201,7 +201,7 @@ orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
 
 #else
 static void
-_backup_orc_memcpy_u32 (OrcExecutor * ex)
+_backup_blendorc_memcpy_u32 (OrcExecutor * ex)
 {
   int i;
   int n = ex->n;
@@ -225,7 +225,7 @@ _backup_orc_memcpy_u32 (OrcExecutor * ex)
 }
 
 void
-orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
+blendorc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
 {
   OrcExecutor _ex, *ex = &_ex;
   static int p_inited = 0;
@@ -238,8 +238,8 @@ orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
       OrcCompileResult result;
 
       p = orc_program_new ();
-      orc_program_set_name (p, "orc_memcpy_u32");
-      orc_program_set_backup_function (p, _backup_orc_memcpy_u32);
+      orc_program_set_name (p, "blendorc_memcpy_u32");
+      orc_program_set_backup_function (p, _backup_blendorc_memcpy_u32);
       orc_program_add_destination (p, 4, "d1");
       orc_program_add_source (p, 4, "s1");
 
@@ -265,7 +265,7 @@ orc_memcpy_u32 (guint32 * d1, const guint32 * s1, int n)
 /* orc_blend_u8 */
 #ifdef DISABLE_ORC
 void
-orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
+blendorc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
     int p1, int n, int m)
 {
   int i;
@@ -317,7 +317,7 @@ orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
 
 #else
 static void
-_backup_orc_blend_u8 (OrcExecutor * ex)
+_backup_blendorc_blend_u8 (OrcExecutor * ex)
 {
   int i;
   int j;
@@ -369,7 +369,7 @@ _backup_orc_blend_u8 (OrcExecutor * ex)
 }
 
 void
-orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
+blendorc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
     int p1, int n, int m)
 {
   OrcExecutor _ex, *ex = &_ex;
@@ -384,8 +384,8 @@ orc_blend_u8 (guint8 * d1, int d1_stride, const guint8 * s1, int s1_stride,
 
       p = orc_program_new ();
       orc_program_set_2d (p);
-      orc_program_set_name (p, "orc_blend_u8");
-      orc_program_set_backup_function (p, _backup_orc_blend_u8);
+      orc_program_set_name (p, "blendorc_blend_u8");
+      orc_program_set_backup_function (p, _backup_blendorc_blend_u8);
       orc_program_add_destination (p, 1, "d1");
       orc_program_add_source (p, 1, "s1");
       orc_program_add_constant (p, 1, 8, "c1");
